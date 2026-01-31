@@ -1,293 +1,303 @@
-// Web Simulation Script
-// Acts as a drop-in replacement for the Chrome Extension content script in the web demo.
+document.addEventListener('DOMContentLoaded', async () => {
 
-// Helper for relative paths in the web structure
-// web/script.js is in ROOT/web/
-// Assets are in ROOT/assets/ -> ../assets/
-// Data is in ROOT/data/ -> ../data/
-// Sidebar is in ROOT/sidebar/ -> ../sidebar/
-function getResourceURL(path) {
-    return '../' + path;
-}
+    // --- 1. UI Elements ---
+    const contentArea = document.getElementById('content-area');
+    const loadingEl = document.getElementById('loading');
+    const tabs = document.querySelectorAll('.tab-btn');
+    const closeBtn = document.getElementById('close-btn');
 
-// Initialize the logic
-function initArticleAnalyst() {
-    console.log('Article Analyst: Running in Web Simulation Mode');
-
-    // 1. Data Loading
+    // --- 2. State & Data Fetching ---
     const urlParams = new URLSearchParams(window.location.search);
-    const idParam = urlParams.get('id');
+    const articleId = urlParams.get('id');
 
-    // Determine Article ID: URL param -> Filename -> Default 'article_1'
-    let articleId = 'article_1'; // Default
-    if (idParam) {
-        articleId = 'article_' + idParam;
+    let analysisData = null;
+
+    try {
+        const response = await fetch('../data/analysis_data.json');
+        const data = await response.json();
+        analysisData = data[articleId];
+
+        if (!analysisData) {
+            throw new Error('Article data not found');
+        }
+
+        // Slight artificial delay to simulate "Processing"
+        setTimeout(() => {
+            renderTab('argumentation'); // Default tab
+        }, 800);
+
+    } catch (e) {
+        loadingEl.innerHTML = `<p style="color:red">Error loading analysis data: ${e.message}</p>`;
     }
 
-    // Validate ID format (simple safety)
-    if (!articleId.startsWith('article_')) articleId = 'article_1';
+    // --- 3. Rendering Logic ---
+    function renderTab(tabName) {
+        // Clear previous content
+        contentArea.innerHTML = '';
 
-    let currentAnalysis = null;
-    let hasHighlighted = false;
+        // Update Tab UI
+        tabs.forEach(t => t.classList.remove('active'));
+        document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
 
-    // Fetch analysis data for highlighting
-    fetch(getResourceURL('data/analysis_data.json'))
-        .then(response => response.json())
-        .then(data => {
-            currentAnalysis = data[articleId];
-            if (!currentAnalysis) console.warn('No analysis data found for ID:', articleId);
-        })
-        .catch(err => console.error('Error loading analysis data:', err));
+        // Logic switch
+        switch (tabName) {
+            case 'argumentation':
+                renderArgumentation();
+                break;
+            case 'language':
+                renderLanguage();
+                break;
+            case 'citations':
+                renderCitations();
+                break;
+            case 'context':
+                renderContext();
+                break;
+        }
+    }
 
-    // 2. Inject Owl Trigger
-    const trigger = document.createElement('div');
-    trigger.id = 'article-analyst-owl-trigger';
-    const icon = document.createElement('img');
-    icon.src = getResourceURL('assets/owl_icon.png');
-    trigger.appendChild(icon);
-    document.body.appendChild(trigger);
+    function renderArgumentation() {
+        const tmpl = document.getElementById('tmpl-argumentation').content.cloneNode(true);
+        const data = analysisData.argumentation;
+        const meta = analysisData.metadata;
 
-    // Animate entrance after 500ms
-    setTimeout(() => {
-        trigger.classList.add('visible');
-    }, 500);
+        // Populate Metadata
+        if (meta) {
+            tmpl.querySelector('.text-type-display').textContent = meta.textType;
+            tmpl.querySelector('.topic-display').textContent = meta.topic;
+        }
 
-    // 3. Create Sidebar Host
-    const sidebarFrame = document.createElement('iframe');
-    sidebarFrame.id = 'article-analyst-sidebar-host';
+        tmpl.querySelector('.thesis-text').textContent = data.thesis;
+        tmpl.querySelector('.conclusion-text').textContent = data.conclusion;
 
-    // Pass the calculated articleId to the sidebar
-    sidebarFrame.src = getResourceURL('sidebar/index.html') + '?id=' + articleId;
-    sidebarFrame.style.border = 'none';
-    document.body.appendChild(sidebarFrame);
+        const list = tmpl.querySelector('.arguments-list');
+        data.arguments.forEach(arg => {
+            const div = document.createElement('div');
+            div.className = 'argument-item';
+            div.innerHTML = `
+                <div class="argument-strength strength-${arg.strength}" title="Strength: ${arg.strength}">
+                    ${getStrengthIcon(arg.strength)}
+                </div>
+                <strong>${arg.type}:</strong> ${arg.content}
+                ${arg.issue ? `<br><small style="color:var(--text-light)">⚠️ ${arg.issue}</small>` : ''}
+            `;
+            list.appendChild(div);
+        });
 
-    // 4. Create Resize Handle
-    const resizeHandle = document.createElement('div');
-    resizeHandle.id = 'article-analyst-resize-handle';
-    document.body.appendChild(resizeHandle);
+        setupFeedback(tmpl, 'argumentation');
+        contentArea.appendChild(tmpl);
+    }
 
-    initResizeLogic(resizeHandle, sidebarFrame);
+    // --- Helper: Strength Icons ---
+    // --- Helper: Strength Icons ---
+    // --- Helper: Strength Icons ---
+    function getStrengthIcon(strength) {
+        // Custom User Icon
+        // Using distinct opacity to still convey some sense of "strength" if needed, 
+        // or just static if preferred. Here preserving semantic distinction via class/opacity.
+        let opacity = '1.0';
+        if (strength === 'medium') opacity = '0.7';
+        if (strength === 'low' || strength === 'issue') opacity = '0.4';
 
-    // 5. Toggle Logic
-    let isOpen = false;
-    trigger.addEventListener('click', () => {
-        isOpen = !isOpen;
-        if (isOpen) {
-            sidebarFrame.classList.add('open');
-            resizeHandle.classList.add('visible');
+        return `<img src="../assets/argument_icon.png" class="strength-icon icon-${strength}" style="opacity: ${opacity};" alt="${strength} strength">`;
+    }
 
-            // Mobile: Lock Background Scroll
-            if (window.innerWidth <= 768) {
-                document.body.style.overflow = 'hidden';
+    // Consistent Color Generation (same as Content)
+    function getColorForType(type) {
+        if (type === 'Dramatisierung') {
+            return '#90ee90'; // Explicit green for Dramatisierung as requested
+        }
+        const colors = [
+            '#FFDDC1', '#C1E1FF', '#D4FFC1', '#F0C1FF', '#FFFFC1', '#C1FFF4',
+            '#FFC1C1', '#E1C1FF', '#C1F4FF', '#E8FFC1'
+        ];
+        let hash = 0;
+        for (let i = 0; i < type.length; i++) {
+            hash = type.charCodeAt(i) + ((hash << 5) - hash);
+        }
+        const index = Math.abs(hash % colors.length);
+        return colors[index];
+    }
+
+    function renderLanguage() {
+        const tmpl = document.getElementById('tmpl-language').content.cloneNode(true);
+        const data = analysisData.language;
+
+        const rhetoricList = tmpl.querySelector('.rhetoric-list');
+        data.rhetoric.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'rhetoric-item';
+            const color = getColorForType(item.type);
+            div.style.borderLeft = `4px solid ${color}`; // Color indicator
+            div.innerHTML = `<strong>${item.type}:</strong> "${item.text}"`;
+            rhetoricList.appendChild(div);
+        });
+
+        const patternsList = tmpl.querySelector('.patterns-list');
+        data.patterns.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'pattern-item';
+            const color = getColorForType(item.name);
+            div.style.borderLeft = `4px solid ${color}`; // Color indicator
+
+            let examplesHtml = '';
+            if (item.examples && item.examples.length > 0) {
+                examplesHtml = `<div style="margin-top:8px; font-size:12px; color:var(--text-light)">
+                    <em>Beispiele:</em><br>
+                    ${item.examples.map(ex => `• "${ex}"`).join('<br>')}
+                </div>`;
             }
 
-            // Trigger highlighting only when opened for the first time
-            if (!hasHighlighted && currentAnalysis && currentAnalysis.language) {
-                if (currentAnalysis.language.rhetoric) {
-                    highlightItems(currentAnalysis.language.rhetoric, 'rhetoric');
+            // Enhanced rendering for Effect ("Wirkung")
+            let effectHtml = '';
+            if (item.effect) {
+                effectHtml = `<p style="margin:8px 0 4px 0"><strong>Wirkung:</strong> ${item.effect}</p>`;
+            }
+
+            div.innerHTML = `
+                <strong>${item.name}</strong>
+                <p style="margin:4px 0">${item.description}</p>
+                ${effectHtml}
+                ${examplesHtml}
+            `;
+            patternsList.appendChild(div);
+        });
+
+        // Glossary
+        const glossarySection = tmpl.querySelector('.glossary-section');
+        if (data.glossary && data.glossary.length > 0) {
+            glossarySection.style.display = 'block';
+            const glossaryList = tmpl.querySelector('.glossary-list');
+            data.glossary.forEach(g => {
+                const div = document.createElement('div');
+                div.className = 'glossary-item';
+                div.innerHTML = `<strong>${g.term}:</strong> ${g.definition}`;
+                glossaryList.appendChild(div);
+            });
+        }
+
+        setupFeedback(tmpl, 'language');
+        contentArea.appendChild(tmpl);
+    }
+
+    function renderCitations() {
+        const tmpl = document.getElementById('tmpl-citations').content.cloneNode(true);
+        const data = analysisData.quotes;
+        const list = tmpl.querySelector('.quotes-list');
+
+        data.forEach(q => {
+            const div = document.createElement('div');
+            div.className = 'quote-item';
+            div.innerHTML = `
+                "${q.text}"
+                <span class="quote-source">— ${q.source}</span>
+                ${q.effect ? `<div style="margin-top:8px; font-size:13px; font-style:normal;"><strong>Wirkung:</strong> ${q.effect}</div>` : ''}
+            `;
+            list.appendChild(div);
+        });
+
+        setupFeedback(tmpl, 'citations');
+        contentArea.appendChild(tmpl);
+    }
+
+    function renderContext() {
+        const tmpl = document.getElementById('tmpl-context').content.cloneNode(true);
+        const data = analysisData.context;
+
+        tmpl.querySelector('.author-name').textContent = data.author.name;
+        tmpl.querySelector('.author-bio').textContent = data.author.bio;
+
+        tmpl.querySelector('.medium-name').textContent = data.medium.name;
+        tmpl.querySelector('.medium-bias').textContent = data.medium.bias;
+
+        // Bias Meter & Reasoning
+        if (data.medium.bias_metrics) {
+            const metrics = data.medium.bias_metrics;
+            const container = document.createElement('div');
+            container.innerHTML = `
+                <div class="bias-meter-container">
+                    <div class="bias-bar bias-bar-left" style="width: ${metrics.liberal}%"></div>
+                    <div class="bias-bar bias-bar-right" style="width: ${metrics.conservative}%"></div>
+                </div>
+                <div class="bias-legend">
+                    <span>Liberal ${metrics.liberal}%</span>
+                    <span>Konservativ ${metrics.conservative}%</span>
+                </div>
+            `;
+            tmpl.querySelector('.medium-block').appendChild(container);
+
+            if (data.medium.bias_reasoning) {
+                const details = document.createElement('details');
+                details.innerHTML = `
+                    <summary>Einordnung Details</summary>
+                    <p>${data.medium.bias_reasoning}</p>
+                 `;
+                tmpl.querySelector('.medium-block').appendChild(details);
+            }
+        }
+
+        const list = tmpl.querySelector('.related-list');
+        data.related.forEach(r => {
+            const div = document.createElement('div');
+            div.className = 'related-item';
+            div.innerHTML = `
+                <a href="#" style="text-decoration:none; color:var(--primary); font-weight:bold">${r.title}</a>
+                <div style="font-size:11px; margin-top:2px; color:var(--text-light)">
+                    ${r.source} • <span style="font-style:italic">${r.bias}</span>
+                </div>
+            `;
+            list.appendChild(div);
+        });
+
+
+
+        setupFeedback(tmpl, 'context');
+        contentArea.appendChild(tmpl);
+    }
+
+    function setupFeedback(parentNode, section) {
+        const btns = parentNode.querySelectorAll('.feedback-btn');
+        const storageKey = `feedback-${articleId}-${section}`;
+        const savedVote = localStorage.getItem(storageKey);
+
+        btns.forEach(btn => {
+            // Restore state
+            if (savedVote && btn.dataset.type === savedVote) {
+                btn.classList.add('active');
+            }
+
+            btn.addEventListener('click', (e) => {
+                const type = e.currentTarget.dataset.type;
+
+                // Toggle off if clicking active
+                if (e.currentTarget.classList.contains('active')) {
+                    e.currentTarget.classList.remove('active');
+                    localStorage.removeItem(storageKey);
+                    console.log(`Feedback [${section}]: Removed`);
+                    return;
                 }
-                if (currentAnalysis.language.patterns) {
-                    highlightItems(currentAnalysis.language.patterns, 'pattern');
-                }
-                hasHighlighted = true;
-            }
-        } else {
-            sidebarFrame.classList.remove('open');
-            resizeHandle.classList.remove('visible');
-            // Remove Scroll Lock
-            document.body.style.overflow = '';
-        }
-    });
 
-    // Listen for close messages from the iframe
-    window.addEventListener('message', (event) => {
-        if (event.data.action === 'closeSidebar') {
-            isOpen = false;
-            sidebarFrame.classList.remove('open');
-            resizeHandle.classList.remove('visible');
-            // Remove Scroll Lock
-            document.body.style.overflow = '';
-        }
-    });
-}
+                // Reset siblings
+                e.currentTarget.parentElement.querySelectorAll('.feedback-btn').forEach(b => b.classList.remove('active'));
 
-function initResizeLogic(handle, sidebar) {
-    let isResizing = false;
-
-    // Mouse/Touch Down
-    const startResize = (e) => {
-        if (e.button !== 0 && e.type === 'mousedown') return; // Only left click
-        e.preventDefault(); // Prevent text selection
-        isResizing = true;
-
-        handle.classList.add('resizing');
-        sidebar.classList.add('resizing');
-        document.body.style.userSelect = 'none'; // Disable selection globally
-
-        // Add listeners to WINDOW with capture to ensure we catch everything
-        window.addEventListener('mousemove', doResize, { capture: true, passive: false });
-        window.addEventListener('mouseup', stopResize, { capture: true });
-        window.addEventListener('mouseleave', stopResize, { capture: true }); // Window leave
-
-        window.addEventListener('touchmove', doResize, { capture: true, passive: false });
-        window.addEventListener('touchend', stopResize, { capture: true });
-        window.addEventListener('touchcancel', stopResize, { capture: true });
-    };
-
-    handle.addEventListener('mousedown', startResize);
-    handle.addEventListener('touchstart', startResize, { passive: false });
-
-    // Drag Logic
-    const doResize = (e) => {
-        if (!isResizing) return;
-
-        // CRITICAL FAIL-SAFE:
-        if (e.type === 'mousemove' && (e.buttons & 1) !== 1) {
-            stopResize();
-            return;
-        }
-
-        e.preventDefault();
-
-        // Check if Mobile (<= 768px matches CSS defined in content.css)
-        const isMobile = window.innerWidth <= 768;
-
-        // Unify touch and mouse coordinates
-        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-
-        if (isMobile) {
-            // Mobile: Resize Height (from bottom)
-            let newHeight = window.innerHeight - clientY;
-
-            // Constraints
-            const minHeight = window.innerHeight * 0.3; // 30vh
-            const maxHeight = window.innerHeight * 0.9; // 90vh
-
-            newHeight = Math.max(minHeight, Math.min(newHeight, maxHeight));
-
-            sidebar.style.height = `${newHeight}px`;
-            handle.style.bottom = `${newHeight}px`;
-            // Reset potential desktop styles
-            sidebar.style.width = '';
-            handle.style.right = '';
-
-        } else {
-            // Desktop: Resize Width (from right)
-            let newWidth = window.innerWidth - clientX;
-
-            // Constraints: 250px (min) to 400px (max)
-            const minWidth = 250;
-            const maxWidth = 400;
-
-            newWidth = Math.max(minWidth, Math.min(newWidth, maxWidth));
-
-            sidebar.style.width = `${newWidth}px`;
-            handle.style.right = `${newWidth}px`;
-            // Reset potential mobile styles
-            sidebar.style.height = '';
-            handle.style.bottom = '';
-        }
-    };
-
-    // Stop Resize
-    const stopResize = () => {
-        if (!isResizing) return;
-        isResizing = false;
-
-        handle.classList.remove('resizing');
-        sidebar.classList.remove('resizing');
-        document.body.style.userSelect = '';
-
-        window.removeEventListener('mousemove', doResize, { capture: true, passive: false });
-        window.removeEventListener('mouseup', stopResize, { capture: true });
-        window.removeEventListener('mouseleave', stopResize, { capture: true });
-
-        window.removeEventListener('touchmove', doResize, { capture: true, passive: false });
-        window.removeEventListener('touchend', stopResize, { capture: true });
-        window.removeEventListener('touchcancel', stopResize, { capture: true });
-    };
-}
-
-
-// Consistent Color Generation (same as Sidebar)
-function getColorForType(type) {
-    if (type === 'Dramatisierung') {
-        return '#90ee90'; // Explicit green for Dramatisierung
+                // Activate clicked
+                e.currentTarget.classList.add('active');
+                localStorage.setItem(storageKey, type);
+                console.log(`Feedback [${section}]: ${type}`);
+            });
+        });
     }
-    const colors = [
-        '#FFDDC1', '#C1E1FF', '#D4FFC1', '#F0C1FF', '#FFFFC1', '#C1FFF4',
-        '#FFC1C1', '#E1C1FF', '#C1F4FF', '#E8FFC1'
-    ];
-    let hash = 0;
-    for (let i = 0; i < type.length; i++) {
-        hash = type.charCodeAt(i) + ((hash << 5) - hash);
-    }
-    const index = Math.abs(hash % colors.length);
-    return colors[index];
-}
 
-function highlightItems(items, category) {
-    items.forEach(item => {
-        let label = '';
-        let textsToHighlight = [];
-
-        if (category === 'rhetoric') {
-            label = item.type;
-            if (item.text) textsToHighlight.push(item.text);
-            if (item.text2) textsToHighlight.push(item.text2);
-        } else if (category === 'pattern') {
-            label = item.name;
-            if (item.examples && Array.isArray(item.examples)) {
-                textsToHighlight = item.examples;
-            }
-        }
-
-        const color = getColorForType(label);
-
-        textsToHighlight.forEach(text => {
-            highlightText(document.body, text, label, color);
+    // --- 4. Event Listeners ---
+    tabs.forEach(btn => {
+        btn.addEventListener('click', () => {
+            renderTab(btn.dataset.tab);
         });
     });
-}
 
-function highlightText(node, text, type, color) {
-    if (node.nodeType === 3) { // Text node
-        if (node.nodeValue.includes('\n')) {
-            node.nodeValue = node.nodeValue.replace(/\s+/g, ' ');
-        }
-        const value = node.nodeValue;
-        const idx = value.indexOf(text);
+    closeBtn.addEventListener('click', () => {
+        // Send message to parent
+        window.parent.postMessage({ action: 'closeSidebar' }, '*');
+    });
 
-        if (idx >= 0) {
-            const span = document.createElement('span');
-            span.className = 'analyst-highlight';
-            span.style.backgroundColor = color;
-            span.setAttribute('data-tooltip', `Pattern: ${type}`);
-            span.textContent = text;
-
-            const after = node.splitText(idx);
-            after.nodeValue = after.nodeValue.substring(text.length);
-            node.parentNode.insertBefore(span, after);
-
-            highlightText(after, text, type, color); // Recursively search remaining
-            return true;
-        }
-    } else if (node.nodeType === 1 && node.childNodes &&
-        !['SCRIPT', 'STYLE', 'IFRAME', 'NOSCRIPT'].includes(node.tagName) &&
-        !node.classList.contains('analyst-highlight')) {
-
-        const childNodes = Array.from(node.childNodes);
-        for (let i = 0; i < childNodes.length; i++) {
-            highlightText(childNodes[i], text, type, color);
-        }
-    }
-    return false;
-}
-
-// Run initialization
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initArticleAnalyst);
-} else {
-    initArticleAnalyst();
-}
+});

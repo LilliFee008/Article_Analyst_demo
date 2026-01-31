@@ -1,0 +1,104 @@
+body {
+    font-family: 'Georgia', serif;
+    line-height: 1.6;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+header {
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+    padding: 20px 0;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.site-name {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-weight: 900;
+    font-size: 2.5em;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    color: #000;
+}
+
+article {
+    max-width: 700px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 60px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+h1 {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 2.5em;
+    line-height: 1.2;
+    margin-bottom: 10px;
+}
+
+.meta {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 0.9em;
+    color: #777;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+}
+
+.author {
+    font-weight: bold;
+    color: #000;
+}
+
+p {
+    margin-bottom: 20px;
+    font-size: 1.1em;
+}
+
+blockquote {
+    border-left: 4px solid #000;
+    margin: 30px 0;
+    padding-left: 20px;
+    font-style: italic;
+    font-size: 1.2em;
+    color: #555;
+}
+
+/* Different Themes for Variety */
+body.theme-tech {
+    font-family: 'Roboto', sans-serif;
+    background-color: #111;
+    color: #ddd;
+}
+body.theme-tech article {
+    background: #1a1a1a;
+    color: #ccc;
+}
+body.theme-tech header {
+    background: #000;
+    border-bottom: 1px solid #333;
+}
+body.theme-tech .site-name {
+    color: #fff;
+    font-family: 'Courier New', monospace;
+}
+body.theme-tech h1 {
+    color: #fff;
+}
+body.theme-tech .author {
+    color: #4da6ff;
+}
+
+body.theme-society {
+    background-color: #f4f1ea;
+}
+body.theme-society article {
+    background: #fcfbf9;
+}
+body.theme-society .site-name {
+    font-family: 'Times New Roman', serif;
+    font-style: italic;
+}

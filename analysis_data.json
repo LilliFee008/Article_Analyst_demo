@@ -1,0 +1,517 @@
+{
+  "article_1": {
+    "id": "article_1",
+    "title": "Inflation: Warum der Höhepunkt noch bevorsteht",
+    "category": "Wirtschaft",
+    "url": "pages/article_1.html",
+    "metadata": {
+      "textType": "Analyse",
+      "topic": "Wirtschaftspolitik"
+    },
+    "argumentation": {
+      "thesis": "Der momentane Preisanstieg sei nicht vorübergehend, sondern würde den Beginn struktureller Knappheit und Stagflation bedeuten. Durch die zögerliche Zinspolitik der Zentralbanken werde die Inflation nicht bekämpft, was zu einem noch höheren Preisanstieg und somit höheren Lebensunterhaltungskosten führen werde.",
+      "arguments": [
+        {
+          "type": "Energie und Produktion",
+          "content": "Ein dauerhafter Preisanstieg um 40 % bei Energie (struktureller Shift) verteuere die gesamte Wertschöpfungskette.<br><small style=\"color:gray\">Faktenargument</small>",
+          "strength": "high"
+        },
+        {
+          "type": "Ende der Globalisierung",
+          "content": "Zitat von Dr. Hans Meyer zur Deglobalisierung, was das Ende billiger Importwaren bedeute.<br><small style=\"color:gray\">Autoritätsargument</small>",
+          "strength": "high"
+        },
+        {
+          "type": "Zweitrundeneffekte",
+          "content": "Die Entstehung einer Lohn-Preis-Spirale, bei der Lohnerhöhungen direkt in höhere Verbraucherpreise umgemünzt würden.<br><small style=\"color:gray\">Faktenargument / Plausibilitätsargument</small>",
+          "strength": "high"
+        },
+        {
+          "type": "Kritik der Zentralbanken",
+          "content": "Aus Angst vor einer Rezession würde die EZB und FED in der Zinspolitik zögern, was zu Inflationsförderung beitragen würde.<br><small style=\"color:gray\">Faktenargument / Plausibilitätsargument</small>",
+          "strength": "high"
+        }
+      ],
+      "conclusion": "Wenn wir nicht entschlossen handeln würden, werde die Inflation, die wir heute sehen würden, im Vergleich zu dem, was noch komme, mild erscheinen."
+    },
+    "language": {
+      "rhetoric": [],
+      "patterns": [
+        {
+          "name": "Vergleich",
+          "description": "Bildhafte Sprache, sehr stark.",
+          "effect": "Emotionalisiert sofort. Erzeugt Kontrollverlust-Narrativ. Implizite Schuldzuweisung an politische/monetäre Akteure.",
+          "examples": [
+            "Die Wirtschaft überhitzt wie eine Dampfmaschine, und der Schaffner scheint am Steuer eingeschlafen zu sein"
+          ]
+        },
+        {
+          "name": "Framing (Abwertung)",
+          "description": "Abwertung durch Wortwahl.",
+          "effect": "Delegitimiert Gegenpositionen. Verstärkt Dringlichkeit. Lenkt Leser eindeutig.",
+          "examples": [
+            "nur ein kleiner Schluckauf",
+            "düstere Realität",
+            "toxische Kombination",
+            "gefährlich obsolet"
+          ]
+        },
+        {
+          "name": "Historische Analogie",
+          "description": "Vergleich mit den 1970er Jahren.",
+          "effect": "Aktiviert kollektive Krisenerinnerung. Verstärkt Bedrohungsgefühl. Impliziert Wiederholungsfehler.",
+          "examples": [
+            "Stagflation der 1970er Jahre"
+          ]
+        },
+        {
+          "name": "Dramatisierung",
+          "description": "Eskalationslogik.",
+          "effect": "Steigert Spannung. Führt zu alarmistischem Schluss.",
+          "examples": [
+            "noch bevorsteht",
+            "im Vergleich zu dem, was noch kommt"
+          ]
+        }
+      ],
+      "glossary": [
+        {
+          "term": "Stagflation",
+          "definition": "Wirtschaftliche Situation, in der Inflation und wirtschaftliche Stagnation gleichzeitig auftreten."
+        },
+        {
+          "term": "Lohn-Preis-Spirale",
+          "definition": "Aufschaukelungseffekt zwischen Lohnerhöhungen und Preiserhöhungen."
+        }
+      ]
+    },
+    "quotes": [
+      {
+        "text": "Wir treten in eine neue Ära permanenter Knappheit ein. Die Zeiten billiger Waren, angetrieben durch reibungslose Globalisierung, sind vorbei.",
+        "source": "Dr. Hans Meyer",
+        "effect": "Autoritätsverstärkung: Als Expertenzitat platziert, gibt es der drastischen Diagnose Legitimität und erhöht die Überzeugungskraft des Artikels, obwohl konkrete Datenquellen nur begrenzt ausgeführt werden und Unterstützung der Hauptthese."
+      },
+      {
+        "text": "Die Kaufkraft der Verbraucher erodiert schneller als zu jedem anderen Zeitpunkt seit dem Zweiten Weltkrieg",
+        "source": "Weltwirtschaftsforum",
+        "effect": "Maximale historische Dramatisierung; Verbindet Makroökonomie mit Alltag; Hohe emotionale Schlagkraft."
+      }
+    ],
+    "context": {
+      "critique": "Fakten werden nicht quellenkritisch abgesichert (keine Datenquelle, kein Zeitraum, keine Methodik); Für einen Meinungsartikel akzeptabel, für Analyse/Report grenzwertig.",
+      "author": {
+        "name": "Sarah Jenkins",
+        "bio": "Leitende Wirtschaftsanalystin, ehemals bei Goldman Sachs. Bekannt für pessimistische Marktausblicke."
+      },
+      "medium": {
+        "name": "The Global Ledger",
+        "bias": "Fiskalkonservativ",
+        "owner": "Ledger Media Group",
+        "bias_metrics": {
+          "liberal": 15,
+          "conservative": 85
+        },
+        "bias_reasoning": "Das Medium vertritt eine klare angebotsorientierte Wirtschaftspolitik. Redaktionelle Leitlinien betonen Haushaltsdisziplin und Marktliberalisierung, was traditionell konservativen Positionen entspricht. Die Eigentümerstruktur (Ledger Media Group) ist bekannt für Lobbyarbeit im Finanzsektor."
+      },
+      "related": [
+        {
+          "title": "Warum die Inflation vorübergehend ist",
+          "source": "The Daily Optimist",
+          "bias": "Liberal"
+        },
+        {
+          "title": "Zentralbanken reagieren über",
+          "source": "Market Watcher",
+          "bias": "Libertär"
+        },
+        {
+          "title": "Lieferketten erholen sich",
+          "source": "Logistics Today",
+          "bias": "Neutral"
+        }
+      ]
+    }
+  },
+  "article_2": {
+    "id": "article_2",
+    "title": "Der Digitale Green Deal: Kann KI das Klima retten?",
+    "category": "Wissenschaft",
+    "url": "pages/article_2.html",
+    "metadata": {
+      "textType": "Analyse",
+      "topic": "Wirtschaftspolitik"
+    },
+    "argumentation": {
+      "thesis": "Künstliche Intelligenz ist das fehlende Glied, um bis 2050 Klimaneutralität zu erreichen.",
+      "arguments": [
+        {
+          "type": "Daten",
+          "content": "KI-Optimierung reduzierte die Kühlkosten der Google-Rechenzentren um 40 %.",
+          "strength": "high"
+        },
+        {
+          "type": "Versprechen",
+          "content": "Intelligente Stromnetze (Smart Grids) werden Energieverschwendung bis 2035 vollständig eliminieren.",
+          "strength": "low",
+          "issue": "Unbelegte Behauptung"
+        }
+      ],
+      "conclusion": "Investitionen in KI sind gleichbedeutend mit Investitionen in den Planeten."
+    },
+    "language": {
+      "rhetoric": [
+        {
+          "type": "Personifikation",
+          "text": "Der Planet atmet auf"
+        }
+      ],
+      "patterns": [
+        {
+          "name": "Techno-Optimismus",
+          "description": "Unkritische Sicht auf Technologie als Retter.",
+          "examples": [
+            "Wir können uns aus dieser Krise herausoptimieren",
+            "KI ist das fehlende Glied"
+          ]
+        },
+        {
+          "name": "Schlagwörter",
+          "description": "Hohe Dichte an Begriffen wie 'Smart', 'Grid', 'Neural', 'Grün'.",
+          "examples": [
+            "Smart Grid",
+            "Carbon Capture",
+            "Klimaneutralität"
+          ]
+        }
+      ],
+      "glossary": [
+        {
+          "term": "Smart Grid",
+          "definition": "Intelligentes Stromnetz, das Energieerzeugung und -verbrauch digital steuert."
+        },
+        {
+          "term": "Carbon Capture",
+          "definition": "Technologie zur Abscheidung und Speicherung von CO2 aus der Atmosphäre."
+        }
+      ]
+    },
+    "quotes": [
+      {
+        "text": "Code ist das neue Carbon Capture. Wir können uns aus dieser Krise herausoptimieren.",
+        "source": "Elena Rostova, Tech-CEO"
+      }
+    ],
+    "context": {
+      "author": {
+        "name": "Marcus Chen",
+        "bio": "Tech-Journalist & Futurist. Berichtet oft über Innovationen aus dem Silicon Valley."
+      },
+      "medium": {
+        "name": "Future Tense",
+        "bias": "Pro-Tech / Progressiv",
+        "owner": "Unabhängig",
+        "bias_metrics": {
+          "liberal": 70,
+          "conservative": 30
+        },
+        "bias_reasoning": "Der Fokus auf Technologie als Lösung für gesellschaftliche Probleme (Solutionismus) und die positive Bewertung von Disruption sind typisch für progressiv-liberale Tech-Medien."
+      },
+      "related": [
+        {
+          "title": "Die Energiekosten von KI",
+          "source": "EcoMonitor",
+          "bias": "Umweltschützer"
+        },
+        {
+          "title": "Greenwashing bei Big Tech",
+          "source": "Critical Review",
+          "bias": "Kritisch"
+        },
+        {
+          "title": "KI: Ein Werkzeug, kein Retter",
+          "source": "Science Weekly",
+          "bias": "Wissenschaftlich"
+        }
+      ]
+    }
+  },
+  "article_3": {
+    "id": "article_3",
+    "title": "Bildung 4.0: Das Ende des Klassenzimmers?",
+    "category": "Gesellschaft",
+    "url": "pages/article_3.html",
+    "metadata": {
+      "textType": "Analyse",
+      "topic": "Wirtschaftspolitik"
+    },
+    "argumentation": {
+      "thesis": "Traditioneller Schulunterricht ist obsolet; hybride Lernmodelle sind die einzige tragfähige Zukunft.",
+      "arguments": [
+        {
+          "type": "Beobachtung",
+          "content": "Die standardisierten Testergebnisse haben in den G7-Nationen ein Plateau erreicht.",
+          "strength": "medium"
+        },
+        {
+          "type": "Lernfolgerung",
+          "content": "Remote-Arbeit erfordert Fähigkeiten zum Fernlernen schon in jungen Jahren.",
+          "strength": "medium"
+        }
+      ],
+      "conclusion": "Schulen müssen sich zu Gemeinschaftszentren statt zu Unterrichtszentren wandeln."
+    },
+    "language": {
+      "rhetoric": [
+        {
+          "type": "Rhetorische Frage",
+          "text": "Warum Methoden aus dem 19. Jahrhundert Kindern des 21. Jahrhunderts aufzwingen?"
+        }
+      ],
+      "patterns": [
+        {
+          "name": "Disruptions-Narrativ",
+          "description": "Das Alte wird als 'kaputt' und das Neue als 'unvermeidlich' dargestellt.",
+          "examples": [
+            "Traditioneller Schulunterricht ist obsolet",
+            "Mauern des Klassenzimmers fallen",
+            "Welt entworfen, die nicht mehr existiert"
+          ]
+        }
+      ],
+      "glossary": [
+        {
+          "term": "Hybride Lernmodelle",
+          "definition": "Kombination aus Präsenzunterricht und digitalem Fernlernen."
+        },
+        {
+          "term": "Lern-Pods",
+          "definition": "Kleine Gruppen von Schülern, die sich zum gemeinsamen Lernen treffen, oft privat organisiert."
+        }
+      ]
+    },
+    "quotes": [
+      {
+        "text": "Die Mauern des Klassenzimmers fallen. Lernen findet heute überall statt.",
+        "source": "Prof. Amara Odu"
+      }
+    ],
+    "context": {
+      "author": {
+        "name": "Dr. Emily Stanton",
+        "bio": "Bildungsreformerin, Autorin von 'Unlearning School'."
+      },
+      "medium": {
+        "name": "Society Next",
+        "bias": "Progressiv",
+        "owner": "Öffentliche Stiftung",
+        "bias_metrics": {
+          "liberal": 85,
+          "conservative": 15
+        },
+        "bias_reasoning": "Das Medium propagiert gesellschaftlichen Wandel und stellt traditionelle Institutionen (Schule) in Frage. Die Finanzierung durch eine öffentliche Stiftung deutet oft auf eine gemeinwohlorientierte, progressive Ausrichtung hin."
+      },
+      "related": [
+        {
+          "title": "Der Wert des Präsenzlernens",
+          "source": "Gewerkschaftsmagazin",
+          "bias": "Traditionell"
+        },
+        {
+          "title": "Die digitale Kluft in der Bildung",
+          "source": "Soziale Gerechtigkeit",
+          "bias": "Kritisch"
+        },
+        {
+          "title": "Trends beim Homeschooling",
+          "source": "Familie Zuerst",
+          "bias": "Konservativ"
+        }
+      ]
+    }
+  },
+  "article_4": {
+    "id": "article_4",
+    "title": "Vertrauensfrage: Demokratie im Zeitalter der Algorithmen",
+    "category": "Politik",
+    "url": "pages/article_4.html",
+    "metadata": {
+      "textType": "Analyse",
+      "topic": "Wirtschaftspolitik"
+    },
+    "argumentation": {
+      "thesis": "Die algorithmische Kuratierung von Nachrichten stellt eine existenzielle Bedrohung für den demokratischen Diskurs dar.",
+      "arguments": [
+        {
+          "type": "Kausalität",
+          "content": "Echokammern erzwingen Polarisierung und machen Kompromisse unmöglich.",
+          "strength": "high"
+        },
+        {
+          "type": "Fakt",
+          "content": "60 % der Wähler beziehen ihre primären Nachrichten aus sozialen Feeds.",
+          "strength": "high"
+        }
+      ],
+      "conclusion": "Die Regulierung von Inhaltsalgorithmen ist eine demokratische Notwendigkeit."
+    },
+    "language": {
+      "rhetoric": [
+        {
+          "type": "Kriegsmetaphern",
+          "text": "Schlachtfeld der Ideen",
+          "text2": "waffenfähiges Informationsökosystem"
+        }
+      ],
+      "patterns": [
+        {
+          "name": "Dringlichkeit",
+          "description": "Framing des Themas als 'Krise' oder 'Notfall'.",
+          "examples": [
+            "existenzielle Bedrohung",
+            "Wir verlieren die gemeinsame Realität",
+            "demokratische Notwendigkeit"
+          ]
+        }
+      ],
+      "glossary": [
+        {
+          "term": "Echokammer",
+          "definition": "Mediale Umgebung, in der man nur mit Meinungen konfrontiert wird, die der eigenen entsprechen."
+        },
+        {
+          "term": "Aufmerksamkeitsökonomie",
+          "definition": "Wirtschaftssystem, das menschliche Aufmerksamkeit als knappe Ressource behandelt und monetarisiert."
+        }
+      ]
+    },
+    "quotes": [
+      {
+        "text": "Wir verlieren die gemeinsame Realität, die für das Regieren erforderlich ist. Wie können wir über Steuerpolitik debattieren, wenn wir uns nicht einmal auf grundlegende Fakten einigen können?",
+        "source": "Senator James Thorn"
+      }
+    ],
+    "context": {
+      "author": {
+        "name": "Raj Patel",
+        "bio": "Politikwissenschaftler in Cambridge."
+      },
+      "medium": {
+        "name": "The Political Review",
+        "bias": "Zentristisch",
+        "owner": "Universitätsverlag",
+        "bias_metrics": {
+          "liberal": 50,
+          "conservative": 50
+        },
+        "bias_reasoning": "Als Publikation eines Universitätsverlags wird Wert auf Ausgewogenheit und akademische Distanz gelegt. Es werden verschiedene Perspektiven beleuchtet, ohne eine Seite klar zu bevorzugen."
+      },
+      "related": [
+        {
+          "title": "Meinungsfreiheit im digitalen Zeitalter",
+          "source": "Liberty Wire",
+          "bias": "Libertär"
+        },
+        {
+          "title": "Inhaltsmoderation ist Zensur",
+          "source": "The Dissenter",
+          "bias": "Rechtsgerichtet"
+        },
+        {
+          "title": "Algorithmen sind Mathematik, keine Voreingenommenheit",
+          "source": "TechCrunch",
+          "bias": "Technokratisch"
+        }
+      ]
+    }
+  },
+  "article_5": {
+    "id": "article_5",
+    "title": "Urban Farming: Revolution oder Hobby?",
+    "category": "Gemischt",
+    "url": "pages/article_5.html",
+    "metadata": {
+      "textType": "Analyse",
+      "topic": "Wirtschaftspolitik"
+    },
+    "argumentation": {
+      "thesis": "Obwohl sozial vorteilhaft, kann Urban Farming keinen bedeutenden Beitrag zur Ernährungssicherheit leisten.",
+      "arguments": [
+        {
+          "type": "Statistik",
+          "content": "Städtische Farmen produzieren weniger als 1 % der in Städten konsumierten Kalorien.",
+          "strength": "high"
+        },
+        {
+          "type": "Gegenargument",
+          "content": "Sie bieten entscheidende Vorteile für den Gemeinschaftsaufbau und die psychische Gesundheit.",
+          "strength": "medium"
+        }
+      ],
+      "conclusion": "Wir sollten städtische Farmen aus sozialen Gründen unterstützen, nicht aus landwirtschaftlichen."
+    },
+    "language": {
+      "rhetoric": [
+        {
+          "type": "Kontrast",
+          "text": "ein Tropfen auf den heißen Stein des globalen Konsums"
+        }
+      ],
+      "patterns": [
+        {
+          "name": "Realismus",
+          "description": "Dämpfung von Erwartungen mit harten Daten.",
+          "examples": [
+            "weniger als 1 %",
+            "existiert innerhalb der Stadtgrenzen einfach nicht",
+            "wird New York nicht ernähren"
+          ]
+        }
+      ],
+      "glossary": [
+        {
+          "term": "Ernährungssicherheit",
+          "definition": "Zustand, in dem alle Menschen jederzeit Zugang zu genügend sicherer und nahrhafter Nahrung haben."
+        }
+      ]
+    },
+    "quotes": [
+      {
+        "text": "Es ist nett, Tomaten anzubauen, aber es wird New York nicht ernähren. Skalierung ist der Feind des städtischen Bauerns.",
+        "source": "Bericht des Landwirtschaftsministeriums"
+      }
+    ],
+    "context": {
+      "author": {
+        "name": "Linda Woo",
+        "bio": "Stadtplanerin und Kritikerin."
+      },
+      "medium": {
+        "name": "City Life",
+        "bias": "Urban Liberal",
+        "owner": "Media Corp",
+        "bias_metrics": {
+          "liberal": 80,
+          "conservative": 20
+        },
+        "bias_reasoning": "Der Fokus auf städtisches Leben, Gemeinschaftsprojekte und soziale Themen spricht eine urbane, linksliberale Zielgruppe an. Kritische Haltung gegenüber landwirtschaftlicher Skalierung zugunsten sozialer Aspekte."
+      },
+      "related": [
+        {
+          "title": "Vertical Farming Skalierung",
+          "source": "AgriTech News",
+          "bias": "Optimistisch"
+        },
+        {
+          "title": "Gemeinschaftsgärten",
+          "source": "Lokalanzeiger",
+          "bias": "Lokales Interesse"
+        },
+        {
+          "title": "Die Zukunft des Essens",
+          "source": "NatGeo",
+          "bias": "Wissenschaftlich"
+        }
+      ]
+    }
+  }
+}

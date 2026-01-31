@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Analyse-Panel</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="sidebar-container">
+        <header>
+            <div class="brand">
+                <img src="../assets/owl_icon.png" alt="Owl">
+                <img src="../assets/ninoxity_logo.png" alt="Ninoxity" class="logo-text-replacement">
+            </div>
+            <button id="close-btn">&times;</button>
+        </header>
+
+        <nav class="tabs">
+            <button class="tab-btn active" data-tab="argumentation">Logik</button>
+            <button class="tab-btn" data-tab="language">Sprache</button>
+            <button class="tab-btn" data-tab="citations">Zitate</button>
+            <button class="tab-btn" data-tab="context">Kontext</button>
+        </nav>
+
+        <main id="content-area">
+            <!-- Dynamic Content will be injected here -->
+            <div id="loading">
+                <div class="spinner"></div>
+                <p>Analysiere Textmuster...</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- Templates for data injection -->
+    <template id="tmpl-argumentation">
+        <div class="section fade-in">
+            <!-- Metadata Header -->
+            <div class="metadata-header">
+                <div class="meta-item">
+                    <span class="meta-label">Texttyp</span>
+                    <span class="meta-value text-type-display"></span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Thema</span>
+                    <span class="meta-value topic-display"></span>
+                </div>
+            </div>
+
+            <div class="card thesis-card">
+                <h3>Hauptthese</h3>
+                <p class="thesis-text"></p>
+            </div>
+            <h3>Argumente</h3>
+            <div class="arguments-list"></div>
+            <div class="card conclusion-card">
+                <h3>Fazit</h3>
+                <p class="conclusion-text"></p>
+            </div>
+
+            <!-- Minimal Feedback -->
+            <div class="feedback-container">
+                <button class="feedback-btn" data-type="up" title="Hilfreich">👍</button>
+                <button class="feedback-btn" data-type="down" title="Nicht hilfreich">👎</button>
+            </div>
+        </div>
+    </template>
+
+    <template id="tmpl-language">
+        <div class="section fade-in">
+            <h3>Rhetorische Stilmittel</h3>
+            <div class="rhetoric-list"></div>
+            <h3>Sprachliche Muster</h3>
+            <div class="patterns-list"></div>
+
+            <!-- Glossary Section -->
+            <div class="glossary-section" style="display:none">
+                <h3>Glossar</h3>
+                <div class="glossary-list"></div>
+            </div>
+
+            <!-- Minimal Feedback -->
+            <div class="feedback-container">
+                <button class="feedback-btn" data-type="up" title="Hilfreich">👍</button>
+                <button class="feedback-btn" data-type="down" title="Nicht hilfreich">👎</button>
+            </div>
+        </div>
+    </template>
+
+    <template id="tmpl-citations">
+        <div class="section fade-in">
+            <h3>Schlüsselzitate</h3>
+            <div class="quotes-list"></div>
+            <!-- Minimal Feedback -->
+            <div class="feedback-container">
+                <button class="feedback-btn" data-type="up" title="Hilfreich">👍</button>
+                <button class="feedback-btn" data-type="down" title="Nicht hilfreich">👎</button>
+            </div>
+        </div>
+    </template>
+
+    <template id="tmpl-context">
+        <div class="section fade-in">
+            <div class="meta-block author-block">
+                <h3>Autor</h3>
+                <p class="author-name"></p>
+                <details>
+                    <summary>Hintergrund</summary>
+                    <div class="details-body">
+                        <p class="author-bio dim"></p>
+                    </div>
+                </details>
+            </div>
+            <div class="meta-block medium-block">
+                <h3>Medium</h3>
+                <p class="medium-name"></p>
+                <span class="badge medium-bias"></span>
+            </div>
+
+            <h3>Verwandte Perspektiven</h3>
+            <div class="related-list"></div>
+
+            <div class="transparency-block">
+                <details>
+                    <summary>Zusatzinformationen</summary>
+                    <div class="details-body">
+                        <h3>Transparenzhinweis</h3>
+                        <p class="disclaimer-text">
+                            Diese Analyse wurde von einer KI erstellt, um Sie zu unterstützen. Sie untersucht Textmuster
+                            und
+                            rhetorische
+                            Strukturen im Artikel.
+                        </p>
+                        <h3>Quellen</h3>
+                        <div class="sources-list">
+                            <p class="dim">Keine externen Quellen in dieser Analyse erkannt.</p>
+                        </div>
+                    </div>
+                </details>
+            </div>
+
+            <div class="footer-disclaimer">
+                <p>⚠️ Nur Unterstützungsmodus. Überprüfung erforderlich.</p>
+            </div>
+
+            <!-- Minimal Feedback -->
+            <div class="feedback-container">
+                <button class="feedback-btn" data-type="up" title="Hilfreich">👍</button>
+                <button class="feedback-btn" data-type="down" title="Nicht hilfreich">👎</button>
+            </div>
+        </div>
+    </template>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

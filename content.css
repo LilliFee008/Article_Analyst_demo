@@ -1,0 +1,217 @@
+#article-analyst-owl-trigger {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 999999;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    /* Unified transition for smooth entrance and hover */
+    transition: all 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #fff;
+
+    /* Initial state: hidden and slightly offset */
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+    pointer-events: none;
+    /* Prevent clicks while invisible */
+}
+
+#article-analyst-owl-trigger.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+}
+
+#article-analyst-owl-trigger.visible:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+#article-analyst-owl-trigger img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Sidebar Overlay Host */
+#article-analyst-sidebar-host {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 0;
+    /* Hidden by default */
+    z-index: 2147483647;
+    /* Max z-index */
+    transition: width 0.4s ease;
+}
+
+#article-analyst-sidebar-host.open {
+    width: 400px;
+}
+
+/* Highlights */
+.analyst-highlight {
+    position: relative;
+    cursor: help;
+    border-radius: 2px;
+    padding: 2px 0;
+    transition: background-color 0.2s;
+}
+
+.analyst-highlight:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 1000000;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    pointer-events: none;
+    margin-bottom: 5px;
+}
+
+.analyst-highlight:hover::before {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: #333;
+    margin-bottom: -5px;
+    z-index: 1000000;
+}
+
+/* Resize Handle */
+#article-analyst-resize-handle {
+    position: fixed;
+    z-index: 2147483648;
+    /* Above sidebar */
+    background: transparent;
+    transition: background 0.2s;
+}
+
+#article-analyst-resize-handle:hover,
+#article-analyst-resize-handle.resizing {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+/* Desktop Mode (Default) */
+@media (min-width: 769px) {
+    #article-analyst-sidebar-host {
+        top: 0;
+        right: 0;
+        height: 100vh !important;
+        /* Override potential mobile inline height */
+        width: 0;
+        transition: width 0.4s ease;
+        border-left: 1px solid rgba(0, 0, 0, 0.1);
+        box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
+    }
+
+    #article-analyst-sidebar-host.open {
+        width: 400px;
+        /* Default open width, overridden by JS inline style if resized */
+    }
+
+    /* Disable transition during resize to prevent lag */
+    /* Disable transition and pointer events during resize to prevent lag and iframe trapping */
+    #article-analyst-sidebar-host.resizing {
+        transition: none;
+        pointer-events: none;
+    }
+
+    #article-analyst-resize-handle {
+        top: 0;
+        right: 0;
+        /* Aligned with sidebar edge */
+        width: 20px;
+        height: 100vh;
+        bottom: auto !important;
+        /* Reset mobile inline bottom */
+        cursor: col-resize;
+        /* When sidebar is closed, handle is hidden. */
+        right: 400px;
+        /* Default open position - sits to the left of the sidebar */
+        display: none;
+        /* Hidden when closed */
+    }
+
+    #article-analyst-resize-handle.visible {
+        display: block;
+    }
+}
+
+/* Mobile Mode */
+@media (max-width: 768px) {
+    #article-analyst-sidebar-host {
+        top: auto;
+        bottom: 0;
+        left: 0;
+        width: 100% !important;
+        /* Force full width on mobile */
+        height: 0;
+        transition: height 0.4s ease;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+        border-radius: 20px 20px 0 0;
+        /* Rounded top corners for modern app feel */
+    }
+
+    #article-analyst-sidebar-host.open {
+        height: 70vh;
+        /* Default open height */
+    }
+
+    #article-analyst-sidebar-host.resizing {
+        transition: none;
+        pointer-events: none;
+    }
+
+    #article-analyst-resize-handle {
+        bottom: 70vh;
+        /* Default open position */
+        left: 0;
+        width: 100%;
+        height: 20px;
+        cursor: row-resize;
+        display: none;
+        /* Center a visual handle indicator */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #article-analyst-resize-handle::after {
+        content: '';
+        width: 40px;
+        height: 4px;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 2px;
+    }
+
+    #article-analyst-resize-handle:not(.visible) {
+        display: none;
+    }
+
+    /* Reset Desktop styles */
+    #article-analyst-resize-handle {
+        right: auto !important;
+        top: auto !important;
+    }
+}
